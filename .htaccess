@@ -1,0 +1,2 @@
+Options -Indexes
+ErrorDocument 403 '<h1 style="text-align: center;text-transform: capitalize;margin-top:2rem;">not found</h1>'
