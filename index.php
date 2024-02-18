@@ -1,5 +1,10 @@
 <?php
-    error_reporting(0);
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'vendor/autoload.php';
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -32,13 +37,45 @@
         }
 
         if(empty($formErrors)){
+            $mail = new PHPMailer();
+
+            try {
+                
+                //Server settings
+                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                   
+                $mail->isSMTP();                                        
+                $mail->Host       = 'smtp.gmail.com';                   
+                $mail->SMTPAuth   = true;                              
+                $mail->Username   = 'mokeddemamine1707@gmail.com';               
+                $mail->Password   = 'kswf yxvp evqh edth';                           
+                $mail->SMTPSecure = 'ssl'; 
+                $mail->Port       = 465;                                  
+
+                //Recipients
+                $mail->setFrom($email,$name);
+                $mail->addAddress('mokeddemamine1707@gmail.com'); 
+
+                //Content
+                $mail->isHTML(true);   
+                $mail->CharSet = 'UTF-8';
+                $mail->Subject = 'Contact Form';
+                $mail->Body    = "<p><b>From:</b> <b>$name</b></p>
+                                <p><b>Email:</b> $email</p>
+                                <p><b>Phone:</b> $phone</p>
+                                <p><b>Content:</b></p>
+                                <p style='margin-left:50px'>$msg</p>";
+
+                $mail->send();
+                $success = '<div class="alert alert-success p-1">Message send with success</div>';
+                // clear the fields
+                $name = '';
+                $email = '';
+                $msg = '';
+                $_POST['number'] = '';
             
-           mail('mokeddemamine1707@gmail.com','Contact Form',$msg);
-           $success = '<div class="alert alert-success p-1">Message send with success</div>';
-           $_POST['number'] = '';
-           $msg = '';
-           $phone = '';
-           $name = '';
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
         }
     }
 ?>
