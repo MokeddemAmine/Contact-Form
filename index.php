@@ -46,8 +46,8 @@
                 $mail->isSMTP();                                        
                 $mail->Host       = 'smtp.gmail.com';                   
                 $mail->SMTPAuth   = true;                              
-                $mail->Username   = 'mokeddemamine1707@gmail.com';               
-                $mail->Password   = 'kswf yxvp evqh edth';                           
+                $mail->Username   = 'your email';               
+                $mail->Password   = 'your apps password in your gamil';                           
                 $mail->SMTPSecure = 'ssl'; 
                 $mail->Port       = 465;                                  
 
