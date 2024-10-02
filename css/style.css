@@ -4,9 +4,11 @@ body{
     font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
+    background: -webkit-radial-gradient(0 50%, circle, #6b69cd, #9a69bb);
 }
-.contact-form input{
+.contact-form input.form-control, textarea.form-control{
     padding-left:30px;
+    border-radius:1rem !important;
 }
 .contact-form input:not(.submit-icon) + i{
     position: relative;
@@ -41,4 +43,7 @@ form.contact-form textarea{
 form.contact-form, .show-errors{
     max-width:500px;
     margin:auto;
+}
+label{
+    font-weight: 500;
 }
